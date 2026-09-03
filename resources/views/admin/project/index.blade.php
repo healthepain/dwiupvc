@@ -41,16 +41,10 @@
                 <thead class="bg-primary text-white">
                     <tr>
                         <th>No</th>
-                        <th>Nama Product</th>
-                        <th>Lebar Kusen</th>
-                        <th>Tinggi Kusen</th>
-                        <th>Lebar Daun</th>
-                        <th>Tinggi Daun</th>
-                        <th>Harga Kusen</th>
-                        <th>Harga Daun</th>
-                        <th>Harga Kaca</th>
-                        <th>Harga Panel</th>
-                        <th>Harga Aksesoris</th>
+                        <th>Nama Project</th>
+                        <th>Deskripsi</th>
+                        <th>Status</th>
+                        <th>Nilai Project</th>
                         <th>
                             <i class="fas fa-cogs"></i>
                         </th>
@@ -59,7 +53,7 @@
 
                 <tbody>
 
-                    @foreach ($products as $index => $product)
+                    @foreach ($projects as $index => $project)
 
                         <tr>
 
@@ -68,43 +62,19 @@
                             </td>
 
                             <td>
-                                {{ $product->product_name }}
+                                {{ $project->project_name }}
                             </td>
 
                             <td>
-                                {{ $product->lebar_kusen }}
+                                {{ $project->project_description }}
                             </td>
 
                             <td>
-                                {{ $product->tinggi_kusen }}
+                                {{ $project->project_status }}
                             </td>
 
                             <td>
-                                {{ $product->lebar_daun }}
-                            </td>
-
-                            <td>
-                                {{ $product->tinggi_daun }}
-                            </td>
-
-                            <td>
-                                Rp {{ number_format($product->harga_kusen, 0, ',', '.') }}
-                            </td>
-
-                            <td>
-                                Rp {{ number_format($product->harga_daun, 0, ',', '.') }}
-                            </td>
-
-                            <td>
-                                Rp {{ number_format($product->harga_kaca, 0, ',', '.') }}
-                            </td>
-
-                            <td>
-                                Rp {{ number_format($product->harga_panel, 0, ',', '.') }}
-                            </td>
-
-                            <td>
-                                Rp {{ number_format($product->harga_aksesoris, 0, ',', '.') }}
+                                Rp {{ number_format($project->value_project, 0, ',', '.') }}
                             </td>
 
                             <td>
@@ -115,10 +85,10 @@
 
                                 <button
                                     class="btn btn-sm btn-danger btn-delete"
-                                    data-id="{{ $product->id }}"
-                                    data-nama="{{ $product->product_name }}"
+                                    data-id="{{ $project->id }}"
+                                    data-nama="{{ $project->project_name }}"
                                     data-toggle="modal"
-                                    data-target="#hapusProduct">
+                                    data-target="#hapusProject">
                                     <i class="fas fa-trash"></i>
                                 </button>
 

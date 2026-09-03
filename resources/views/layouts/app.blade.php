@@ -66,15 +66,15 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item {{ $menuBarang ?? '' }}">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ $menuProduct ?? '' }}">
+                <a class="nav-link" href="{{ route('product.index') }}">
                     <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Data Barang</span></a>
+                    <span>Data Product</span></a>
             </li>
-            <li class="nav-item {{ $menuPenjualan ?? '' }}">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ $menuProject ?? '' }}">
+                <a class="nav-link" href="{{ route('project.index') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Data Penjualan</span></a>
+                    <span>Data Project</span></a>
             </li>
 
             <!-- Divider -->
