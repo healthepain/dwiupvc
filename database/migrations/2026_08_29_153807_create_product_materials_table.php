@@ -8,11 +8,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 
      */
     public function up(): void
     {
         Schema::create('product_materials', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('model_id')->constrained('product_models')->onDelete('cascade');
+            $table->string('material_name', 255);
             $table->timestamps();
         });
     }
