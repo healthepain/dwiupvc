@@ -33,7 +33,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'project_name' => 'required',
+            'project_description' => 'required',
+            'project_status' => 'required|in:not_started,in_progress,completed',
+            'value_project' => 'required|integer|min:0',
+        ]);
+
+        Project::create([
+            'project_name' => $request->project_name,
+            'project_description' => $request->project_description,
+            'project_status' => $request->project_status,
+            'value_project' => $request->value_project,
+        ]);
+        return redirect()
+        ->route('project.index')
+        ->with('success', 'Project created successfully.');
     }
 
     /**
@@ -65,6 +80,8 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+        return redirect()->route('project.index')->with('success', 'Project deleted successfully.');
     }
 }

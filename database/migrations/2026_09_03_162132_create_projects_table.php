@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('project_name');
             $table->string('project_description');
             $table->enum('project_status', ['not_started', 'in_progress', 'completed'])->default('not_started');
-            $table->integer('value_project')->default(0);
+            $table->bigInteger('value_project')->default(0);
             $table->timestamps();
         });
     }
