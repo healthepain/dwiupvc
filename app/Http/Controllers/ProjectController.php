@@ -56,7 +56,12 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = [
+            'title' => 'Project Details',
+            'menuProject' => 'active',
+            'projects' => Project::with('products')->findOrFail($id),
+        ];
+        return view('admin.project.show', $data);
     }
 
     /**

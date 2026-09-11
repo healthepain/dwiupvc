@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->integer('tinggi_kusen')->default(0);
-            $table->integer('lebar_kusen')->default(0);
+            $table->decimal('tinggi_kusen', 8, 2)->default(0);
+            $table->decimal('lebar_kusen', 8, 2)->default(0);
             $table->integer('harga_hitam')->default(0);
             $table->integer('harga_putih')->default(0);
             $table->timestamps();

@@ -37,7 +37,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-tasks"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Lucius Artorius</div>
+                <div class="sidebar-brand-text mx-3"></div>
             </a>
 
             <!-- Divider -->
@@ -102,6 +102,15 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <!-- Judul Halaman -->
+                    <div class="d-flex flex-column mr-auto">
+                        <h1 class="h5 mb-0 text-gray-800 font-weight-bold">
+                            {{ $title ?? 'Dashboard' }}
+                        </h1>
+                        <small class="text-muted d-none d-md-block">
+                            {{ $subtitle ?? 'Selamat datang kembali, ' . Auth::user()->name }}
+                        </small>
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -117,13 +126,12 @@
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('sbadmin2/img/undraw_profile.svg') }}">
                             </a>
+
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
-                                    <i class="badge badge-success justify-content-center d-flex">
-                                        Admin
-                                    </i>
+                                    <i class="badge badge-success justify-content-center d-flex">Admin</i>
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
