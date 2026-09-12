@@ -70,7 +70,7 @@
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
 
             <div class="mb-1 mr-2">
-                <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tambahProject">
+                <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tambahProduct">
                     <i class="fas fa-plus"></i>
                     Tambah Product
                 </a>
@@ -179,5 +179,194 @@
 
 
 
-    <!-- Modal Tambah Project -->
+    <!-- Modal Tambah Product -->
+
+    <div class="modal fade" id="tambahProduct" tabindex="-1" role="dialog" aria-labelledby="tambahProductLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+
+                <!-- Modal Header -->
+                <div class="modal-header border-0 pt-4 px-4 pb-2">
+                    <div>
+                        <h5 class="modal-title font-weight-bold text-dark" id="tambahProductLabel">
+                            Tambah Product
+                        </h5>
+
+                        <p class="text-muted small mb-0">
+                            Tambahkan product ke dalam project.
+                        </p>
+                    </div>
+
+                    <button class="close bg-light rounded-circle p-2 d-flex align-items-center justify-content-center"
+                        style="width: 32px; height: 32px; transition: 0.2s;" type="button" data-dismiss="modal"
+                        aria-label="Close">
+
+                        <span aria-hidden="true" style="line-height: 0;">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body px-4 pb-4">
+
+                    <form id="formTambahProduct">
+
+                        @csrf
+
+                        <!-- Product -->
+                        <div class="form-group mb-3">
+
+                            <label class="small font-weight-bold text-secondary mb-1">
+                                Product
+                            </label>
+
+                            <select id="product_id" name="product_id" class="form-control bg-light border-0 custom-select"
+                                style="border-radius: 8px; height: auto; padding-top: 8px; padding-bottom: 8px;" required>
+
+                                <option value="">
+                                    -- Pilih Product --
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Ukuran Kusen -->
+                        <div class="row">
+
+                            <!-- Lebar -->
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-3">
+
+                                    <label class="small font-weight-bold text-secondary mb-1">
+                                        Lebar Kusen
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <input type="number" id="lebar_kusen" name="lebar_kusen"
+                                            class="form-control bg-light border-0 py-2" style="border-radius: 8px;"
+                                            placeholder="Contoh: 1.20" step="0.01" min="0" disabled required>
+
+                                        <div class="input-group-append">
+                                            <span class="input-group-text bg-light border-0">
+                                                m
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Tinggi -->
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-3">
+
+                                    <label class="small font-weight-bold text-secondary mb-1">
+                                        Tinggi Kusen
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <input type="number" id="tinggi_kusen" name="tinggi_kusen"
+                                            class="form-control bg-light border-0 py-2" style="border-radius: 8px;"
+                                            placeholder="Contoh: 2.00" step="0.01" min="0" disabled required>
+
+                                        <div class="input-group-append">
+                                            <span class="input-group-text bg-light border-0">
+                                                m
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Harga -->
+                        <div class="row">
+
+                            <!-- Harga Hitam -->
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-3">
+
+                                    <label class="small font-weight-bold text-secondary mb-1">
+                                        Harga Hitam
+                                    </label>
+
+                                    <div id="harga_hitam_display"
+                                        class="form-control bg-light border-0 font-weight-bold text-dark"
+                                        style="border-radius: 8px;">
+                                        Rp 0
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Harga Putih -->
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-3">
+
+                                    <label class="small font-weight-bold text-secondary mb-1">
+                                        Harga Putih
+                                    </label>
+
+                                    <div id="harga_putih_display"
+                                        class="form-control bg-light border-0 font-weight-bold text-dark"
+                                        style="border-radius: 8px;">
+                                        Rp 0
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Keterangan -->
+                        <small class="form-text text-muted mb-4" style="font-size: 11px;">
+                            Harga akan dihitung otomatis berdasarkan product dan ukuran
+                            kusen yang dipilih.
+                        </small>
+
+                        <!-- Modal Footer -->
+                        <div class="d-flex justify-content-end gap-2 border-0 pt-2">
+
+                            <button class="btn btn-light font-weight-bold px-4 py-2 mr-2 text-secondary"
+                                style="border-radius: 8px;" type="button" data-dismiss="modal">
+
+                                Batal
+
+                            </button>
+
+                            <button id="btnTambahProduct" class="btn btn-primary font-weight-bold px-4 py-2 shadow-sm"
+                                style="border-radius: 8px; background-color: #0d6efd;" type="submit" disabled>
+
+                                Tambah Product
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 @endsection
