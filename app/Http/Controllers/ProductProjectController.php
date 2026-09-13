@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductProject;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductProjectController extends Controller
 {
@@ -137,5 +138,20 @@ class ProductProjectController extends Controller
         return redirect()
             ->route('project.show', $projectId)
             ->with('success', 'Product berhasil dihapus dari project.');
+    }
+
+    public function pdf(Project $project)
+    {
+        // ambil data product dalam project
+        $project->load('products');
+
+        $pdf = Pdf::loadView(
+            'admin.project.pdf',
+            compact('project')
+        );
+
+        return $pdf->stream(
+            'project-' . $project->id . '.pdf'
+        );
     }
 }

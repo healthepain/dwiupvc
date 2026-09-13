@@ -36,6 +36,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::delete('/product-project/{productProject}', [ProductProjectController::class, 'destroy'])
         ->name('product-project.destroy');
+    Route::get('/project/{project}/products/pdf', [ProductProjectController::class, 'pdf'])
+        ->name('product-project.pdf');
 });
 
 require __DIR__ . '/auth.php';

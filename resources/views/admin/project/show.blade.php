@@ -82,7 +82,7 @@
                     Excel
                 </a>
 
-                <a href="#" class="btn btn-sm btn-danger">
+                <a href="{{ route('product-project.pdf', $projects->id) }}" class="btn btn-sm btn-danger" target="_blank">
                     <i class="fas fa-file-pdf"></i>
                     PDF
                 </a>
