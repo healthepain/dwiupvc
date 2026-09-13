@@ -16,7 +16,7 @@ class Project extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_project')
-                    ->withPivot('tinggi_kusen', 'lebar_kusen', 'harga_hitam', 'harga_putih')
-                    ->withTimestamps();
+            ->withPivot('id', 'tinggi_kusen', 'lebar_kusen', 'harga_hitam', 'harga_putih')
+            ->withTimestamps();
     }
 }

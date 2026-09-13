@@ -18,6 +18,8 @@ class ProductProjectController extends Controller
         $products = Product::select(
             'id',
             'product_name',
+            'lebar_kusen',
+            'tinggi_kusen',
             'jumlah_lebar_kusen',
             'jumlah_tinggi_kusen',
             'jumlah_lebar_daun',
@@ -28,8 +30,8 @@ class ProductProjectController extends Controller
             'harga_panel',
             'harga_aksesoris'
         )
-        ->orderBy('product_name')
-        ->get();
+            ->orderBy('product_name')
+            ->get();
 
         return response()->json($products);
     }
@@ -118,11 +120,9 @@ class ProductProjectController extends Controller
             'harga_putih' => round($hargaPutih),
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Product berhasil ditambahkan ke project.',
-            'data' => $productProject,
-        ]);
+        return redirect()
+            ->route('project.show', $project->id)
+            ->with('success', 'Project created successfully.');
     }
 
     /**
@@ -130,12 +130,12 @@ class ProductProjectController extends Controller
      */
     public function destroy(ProductProject $productProject)
     {
+        $projectId = $productProject->project_id;
+
         $productProject->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Product berhasil dihapus dari project.',
-        ]);
+        return redirect()
+            ->route('project.show', $projectId)
+            ->with('success', 'Product berhasil dihapus dari project.');
     }
 }
-
