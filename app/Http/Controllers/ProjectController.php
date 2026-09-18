@@ -5,20 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 
+
 class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $data = [
-            'title' => 'Project',
-            'menuProject' => 'active',
-            'projects' => Project::all(),
-        ];
-        return view('admin.project.index', $data);
+public function index()
+{
+    $user = auth()->user();
+
+    if ($user->role === 'admin') {
+        $projects = Project::latest()->get();
+    } else {
+        $projects = Project::where('user_id', $user->id)
+            ->latest()
+            ->get();
     }
+
+    $data = [
+        'title' => 'Project',
+        'menuProject' => 'active',
+        'projects' => $projects,
+    ];
+
+    return view('admin.project.index', $data);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -39,12 +51,13 @@ class ProjectController extends Controller
             'project_status' => 'required|in:not_started,in_progress,completed',
             'value_project' => 'required|integer|min:0',
         ]);
-
+         
         Project::create([
             'project_name' => $request->project_name,
             'project_description' => $request->project_description,
             'project_status' => $request->project_status,
             'value_project' => $request->value_project,
+            'user_id' => auth()->id(),
         ]);
         return redirect()
         ->route('project.index')
