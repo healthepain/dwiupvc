@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Gate;
 
 
 class ProjectController extends Controller
@@ -69,12 +70,17 @@ public function index()
      */
     public function show(string $id)
     {
-        $data = [
-            'title' => 'Project Details',
-            'menuProject' => 'active',
-            'projects' => Project::with('products')->findOrFail($id),
-        ];
-        return view('admin.project.show', $data);
+    $project = Project::with('products')->findOrFail($id);
+
+    Gate::authorize('view', $project);
+
+    $data = [
+        'title' => 'Project Details',
+        'menuProject' => 'active',
+        'projects' => $project,
+    ];
+
+    return view('admin.project.show', $data);
     }
 
     /**

@@ -55,22 +55,23 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Menu Admin
+                
             </div>
+            @if (auth()->user()->role == 'admin')
+                <!-- Nav Item - Charts -->
+                <li class="nav-item {{ $menuUser ?? '' }}">
+                    <a class="nav-link" href="{{ route('user.index') }}">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Data User</span></a>
+                </li>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item {{ $menuUser ?? '' }}">
-                <a class="nav-link" href="{{ route('user.index') }}">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Data User</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item {{ $menuProduct ?? '' }}">
-                <a class="nav-link" href="{{ route('product.index') }}">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Data Product</span></a>
-            </li>
+                <!-- Nav Item - Tables -->
+                <li class="nav-item {{ $menuProduct ?? '' }}">
+                    <a class="nav-link" href="{{ route('product.index') }}">
+                        <i class="fas fa-fw fa-clipboard-list"></i>
+                        <span>Data Product</span></a>
+                </li>
+            @endif
             <li class="nav-item {{ $menuProject ?? '' }}">
                 <a class="nav-link" href="{{ route('project.index') }}">
                     <i class="fas fa-fw fa-table"></i>
@@ -122,7 +123,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->role }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('sbadmin2/img/undraw_profile.svg') }}">
                             </a>
