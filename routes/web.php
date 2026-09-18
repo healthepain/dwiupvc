@@ -23,9 +23,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('product', ProductController::class);
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::resource('project', ProjectController::class);
     // Product dalam Project
     Route::get('/project-products', [ProductProjectController::class, 'products'])
