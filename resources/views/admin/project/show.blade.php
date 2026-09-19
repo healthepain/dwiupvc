@@ -8,38 +8,65 @@
 
     <div class="card border-0 shadow-sm rounded-4 mb-4">
         {{-- Header --}}
-        <div
-            class="card-header bg-white border-0 pt-4 px-4 pb-3 d-flex justify-content-between align-items-start flex-wrap gap-2">
-            <div>
-                <small class="text-uppercase text-muted fw-bold" style="font-size: .7rem; letter-spacing: .05em;">
-                    Ringkasan Informasi
-                </small>
-                <h5 class="mb-0 fw-bold text-dark mt-1">{{ $projects->project_name }}</h5>
+        <div class="card-header bg-white border-0 pt-4 px-4 pb-3">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                <div>
+                    <small class="text-uppercase text-muted fw-semibold" style="font-size: .7rem; letter-spacing: .08em;">
+                        Ringkasan Informasi
+                    </small>
+                    <h5 class="mb-0 fw-bold text-dark mt-1">
+                        {{ $projects->project_name }}
+                    </h5>
+                </div>
+
+                {{-- Badge Status --}}
+                @php
+                    $statusMap = [
+                        'active' => ['bg-success-subtle text-success border-success-subtle', 'Active'],
+                        'pending' => ['bg-warning-subtle text-warning border-warning-subtle', 'Pending'],
+                        'completed' => ['bg-primary-subtle text-primary border-primary-subtle', 'Completed'],
+                    ];
+                    $status = $statusMap[$projects->project_status] ?? [
+                        'bg-secondary-subtle text-secondary border-secondary-subtle',
+                        ucfirst($projects->project_status),
+                    ];
+                @endphp
+
+                <span class="badge {{ $status[0] }} border rounded-pill px-3 py-2 fw-semibold">
+                    <i class="fas fa-circle fa-xs me-1"></i> {{ $status[1] }}
+                </span>
             </div>
-
-            {{-- Badge Status --}}
-            @php
-                $statusMap = [
-                    'active' => ['bg-success-subtle text-success border-success-subtle', 'Active'],
-                    'pending' => ['bg-warning-subtle text-warning border-warning-subtle', 'Pending'],
-                    'completed' => ['bg-primary-subtle text-primary border-primary-subtle', 'Completed'],
-                ];
-                $status = $statusMap[$projects->project_status] ?? [
-                    'bg-secondary-subtle text-secondary border-secondary-subtle',
-                    ucfirst($projects->project_status),
-                ];
-            @endphp
-
-            <span class="badge {{ $status[0] }} border rounded-pill px-3 py-2 fw-semibold">
-                <i class="fas fa-circle fa-xs me-1"></i> {{ $status[1] }}
-            </span>
         </div>
 
         {{-- Body --}}
         <div class="card-body px-4 pb-4 pt-0">
             <div class="row g-3">
-                {{-- Nilai Proyek --}}
-                <div class="col-md-4">
+
+                {{-- Baris 1 : 2 kolom seimbang (50 : 50) --}}
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded-3 h-100">
+                        <small class="text-muted d-block mb-1">
+                            <i class="fas fa-user me-1"></i> Nama Client
+                        </small>
+                        <div class="fw-semibold text-dark">
+                            {{ $projects->nama_client ?? 'Tidak ada data client.' }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded-3 h-100">
+                        <small class="text-muted d-block mb-1">
+                            <i class="fas fa-map-marker-alt me-1"></i> Alamat Project
+                        </small>
+                        <div class="text-dark small" style="line-height: 1.6;">
+                            {{ $projects->alamat_project ?? 'Tidak ada alamat.' }}
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Baris 2 : 2 kolom seimbang (50 : 50) --}}
+                <div class="col-md-6">
                     <div class="p-3 bg-light rounded-3 h-100">
                         <small class="text-muted d-block mb-1">Nilai Proyek</small>
                         <h4 class="fw-bold text-primary mb-0">
@@ -48,8 +75,7 @@
                     </div>
                 </div>
 
-                {{-- Deskripsi --}}
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="p-3 bg-light rounded-3 h-100">
                         <small class="text-muted d-block mb-1">Deskripsi Proyek</small>
                         <p class="mb-0 text-dark small" style="line-height: 1.6;">
@@ -57,6 +83,7 @@
                         </p>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -48,6 +48,8 @@ public function index()
     {
         $request->validate([
             'project_name' => 'required',
+            'nama_client' => 'required',
+            'alamat_project' => 'required',
             'project_description' => 'required',
             'project_status' => 'required|in:not_started,in_progress,completed',
             'value_project' => 'required|integer|min:0',
@@ -55,6 +57,8 @@ public function index()
          
         Project::create([
             'project_name' => $request->project_name,
+            'nama_client' => $request->nama_client,
+            'alamat_project' => $request->alamat_project,
             'project_description' => $request->project_description,
             'project_status' => $request->project_status,
             'value_project' => $request->value_project,

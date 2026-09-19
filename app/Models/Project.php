@@ -10,6 +10,8 @@ class Project extends Model
         'user_id',
         'project_name',
         'project_description',
+        'nama_client',
+        'alamat_project',
         'project_status',
         'value_project',
     ];

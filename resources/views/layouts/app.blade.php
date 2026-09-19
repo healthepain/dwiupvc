@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Lucius | {{ $title ?? 'Dashboard' }}</title>
+    <title>DWI | {{ $title ?? 'Dashboard' }}</title>
 
     <!-- Custom fonts for this template-->
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
@@ -222,6 +222,12 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin2/js/demo/datatables-demo.js') }}"></script>
+
+     <!-- Page level plugins -->
+    <script src="{{ asset('sbadmin2/vendor/chart.js/Chart.min.js') }}"></script>
+
+        <!-- Page level custom scripts -->
+    <script src="{{ asset('sbadmin2/js/demo/chart-bar-demo.js') }}"></script>
 </body>
 
 </html>

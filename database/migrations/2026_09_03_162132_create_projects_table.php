@@ -18,6 +18,8 @@ return new class extends Migration
             ->onDelete('cascade');
             $table->string('project_name');
             $table->string('project_description');
+            $table->string('nama_client');
+            $table->string('alamat_project');
             $table->enum('project_status', ['not_started', 'in_progress', 'completed'])->default('not_started');
             $table->bigInteger('value_project')->default(0);
             $table->timestamps();

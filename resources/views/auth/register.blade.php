@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Smoke Zone — Daftar</title>
+    <title>DWI — Daftar</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -249,7 +249,7 @@
     <div class="register-card">
 
         <div class="register-header">
-            <h1>Lucius <span>Artorius</span></h1>
+            <h1>Doors & Windows <span>Indonesia</span></h1>
             <p>Buat akun baru</p>
         </div>
 

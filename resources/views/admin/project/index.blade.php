@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     <div class="card shadow mb-4">
 
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -38,6 +36,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Project</th>
+                            <th>Detail Client</th>
                             <th>Deskripsi</th>
                             <th>Status</th>
                             <th>Nilai Project</th>
@@ -59,7 +58,9 @@
                                 <td>
                                     {{ $project->project_name }}
                                 </td>
-
+                                <td>
+                                    {{ $project->nama_client }} - {{ $project->alamat_project }}
+                                </td>
                                 <td>
                                     {{ $project->project_description }}
                                 </td>
@@ -146,9 +147,28 @@
 
                             <input type="text" name="project_name" class="form-control bg-light border-0 py-2"
                                 style="border-radius: 8px;" placeholder="Masukkan nama project"
-                                value="{{ old('project_name') }}" required>
+                                value="{{ old('project_name') }}" required autocomplete="off">
                         </div>
 
+
+                        <div class="form-group mb-3">
+                            <label class="small font-weight-bold text-secondary mb-1">
+                                Nama Client
+                            </label>
+
+                            <input type="text" name="nama_client" class="form-control bg-light border-0 py-2"
+                                style="border-radius: 8px;" placeholder="Masukkan nama client"
+                                value="{{ old('nama_client') }}" required autocomplete="off">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="small font-weight-bold text-secondary mb-1">
+                                Alamat Project
+                            </label>
+
+                            <input type="text" name="alamat_project" class="form-control bg-light border-0 py-2"
+                                style="border-radius: 8px;" placeholder="Masukkan alamat project"
+                                value="{{ old('alamat_client') }}" required autocomplete="off">
+                        </div>
                         <!-- Deskripsi Project -->
                         <div class="form-group mb-3">
                             <label class="small font-weight-bold text-secondary mb-1">
@@ -158,7 +178,6 @@
                             <textarea name="project_description" class="form-control bg-light border-0" style="border-radius: 8px;" rows="3"
                                 placeholder="Masukkan deskripsi project" required>{{ old('project_description') }}</textarea>
                         </div>
-
                         <!-- Status & Nilai Project -->
                         <div class="row">
 
@@ -202,9 +221,10 @@
                                         Nilai Project
                                     </label>
 
-                                    <input type="number" name="value_project" class="form-control bg-light border-0 py-2"
-                                        style="border-radius: 8px;" placeholder="Contoh: 25000000"
-                                        value="{{ old('value_project') }}" min="0" required>
+                                    <input type="number" name="value_project"
+                                        class="form-control bg-light border-0 py-2" style="border-radius: 8px;"
+                                        placeholder="Contoh: 25000000" value="{{ old('value_project') }}" min="0"
+                                        required>
 
                                 </div>
                             </div>

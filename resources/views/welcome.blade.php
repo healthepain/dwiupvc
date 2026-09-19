@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Smoke Zone</title>
+    <title>DWI</title>
 
     <!-- Fonts -->
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
@@ -158,7 +158,7 @@
 
         <!-- Judul -->
         <h1 class="title">
-            Lucius <span>Artorius</span>
+            Doors & Windows <span>Indonesia</span>
         </h1>
 
         <!-- Deskripsi -->
