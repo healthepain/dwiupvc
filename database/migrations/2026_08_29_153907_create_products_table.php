@@ -18,9 +18,9 @@ return new class extends Migration
 
             $table->foreignId('type_id')->constrained('product_types')->onDelete('cascade');
 
-            $table->foreignId('model_id')->constrained('product_models')->onDelete('cascade');
+            $table->foreignId('model_id')->nullable()->constrained('product_models')->onDelete('cascade');
 
-            $table->foreignId('material_id')->constrained('product_materials')->onDelete('cascade');
+            $table->foreignId('material_id')->nullable()->constrained('product_materials')->onDelete('cascade');
 
             $table->foreignId('variant_id')->nullable()->constrained('product_variants')->onDelete('cascade');
 
@@ -32,11 +32,11 @@ return new class extends Migration
             $table->decimal('tinggi_kusen', 8, 2)->default(0);
             $table->integer('jumlah_tinggi_kusen');
 
-            $table->decimal('lebar_daun', 8, 2)->default(0);
-            $table->integer('jumlah_lebar_daun');
+            $table->decimal('lebar_daun', 8, 2)->default(0)->nullable();
+            $table->integer('jumlah_lebar_daun')->nullable();
 
-            $table->decimal('tinggi_daun', 8, 2)->default(0);
-            $table->integer('jumlah_tinggi_daun');
+            $table->decimal('tinggi_daun', 8, 2)->default(0)->nullable();
+            $table->integer('jumlah_tinggi_daun')->nullable();
 
             $table->integer('harga_kusen')->nullable();
             $table->integer('harga_daun')->nullable();
