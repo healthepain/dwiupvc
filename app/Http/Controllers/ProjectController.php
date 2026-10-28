@@ -100,7 +100,31 @@ public function index()
      */
     public function update(Request $request, string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+    Gate::authorize('update', $project);
+
+    $request->validate([
+        'project_name' => 'required',
+        'nama_client' => 'required',
+        'alamat_project' => 'required',
+        'project_description' => 'required',
+        'project_status' => 'required|in:not_started,in_progress,completed',
+        'value_project' => 'required|integer|min:0',
+    ]);
+
+    $project->update([
+        'project_name' => $request->project_name,
+        'nama_client' => $request->nama_client,
+        'alamat_project' => $request->alamat_project,
+        'project_description' => $request->project_description,
+        'project_status' => $request->project_status,
+        'value_project' => $request->value_project,
+    ]);
+
+    return redirect()
+        ->route('project.show', $project->id)
+        ->with('success', 'Project updated successfully.');
     }
 
     /**

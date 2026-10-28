@@ -19,22 +19,31 @@
                     </h5>
                 </div>
 
-                {{-- Badge Status --}}
-                @php
-                    $statusMap = [
-                        'active' => ['bg-success-subtle text-success border-success-subtle', 'Active'],
-                        'pending' => ['bg-warning-subtle text-warning border-warning-subtle', 'Pending'],
-                        'completed' => ['bg-primary-subtle text-primary border-primary-subtle', 'Completed'],
-                    ];
-                    $status = $statusMap[$projects->project_status] ?? [
-                        'bg-secondary-subtle text-secondary border-secondary-subtle',
-                        ucfirst($projects->project_status),
-                    ];
-                @endphp
+                <div class="d-flex align-items-center gap-2">
+                    {{-- Badge Status --}}
+                    @php
+                        $statusMap = [
+                            'active' => ['bg-success-subtle text-success border-success-subtle', 'Active'],
+                            'pending' => ['bg-warning-subtle text-warning border-warning-subtle', 'Pending'],
+                            'completed' => ['bg-primary-subtle text-primary border-primary-subtle', 'Completed'],
+                        ];
+                        $status = $statusMap[$projects->project_status] ?? [
+                            'bg-secondary-subtle text-secondary border-secondary-subtle',
+                            ucfirst($projects->project_status),
+                        ];
+                    @endphp
 
-                <span class="badge {{ $status[0] }} border rounded-pill px-3 py-2 fw-semibold">
-                    <i class="fas fa-circle fa-xs me-1"></i> {{ $status[1] }}
-                </span>
+                    <span class="badge {{ $status[0] }} border rounded-pill px-3 py-2 fw-semibold"
+                        style="margin-right:8px ">
+                        <i class="fas fa-circle fa-xs me-1"></i> {{ $status[1] }}
+                    </span>
+
+                    {{-- Tombol Edit --}}
+                    <a href="" class="btn btn-sm btn-outline-primary rounded-pill px-3" data-toggle="modal"
+                        data-target="#editProject">
+                        <i class="fas fa-pen me-1"></i> Edit
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -248,7 +257,8 @@
                                 Product
                             </label>
 
-                            <select id="product_id" name="product_id" class="form-control bg-light border-0 custom-select"
+                            <select id="product_id" name="product_id"
+                                class="form-control bg-light border-0 custom-select"
                                 style="border-radius: 8px; height: auto; padding-top: 8px; padding-bottom: 8px;" required>
 
                                 <option value="">
@@ -441,6 +451,164 @@
                             Ya, Hapus
                         </button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modeal edit project --}}
+    <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="editProjectLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+
+                <!-- Modal Header -->
+                <div class="modal-header border-0 pt-4 px-4 pb-2">
+                    <div>
+                        <h5 class="modal-title font-weight-bold text-dark" id="editProjectLabel">
+                            Edit Project
+                        </h5>
+
+                        <p class="text-muted small mb-0">
+                            Perbarui informasi project ini.
+                        </p>
+                    </div>
+
+                    <button class="close bg-light rounded-circle p-2 d-flex align-items-center justify-content-center"
+                        style="width: 32px; height: 32px; transition: 0.2s;" type="button" data-dismiss="modal"
+                        aria-label="Close">
+
+                        <span aria-hidden="true" style="line-height: 0;">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body px-4 pb-4">
+
+                    <form method="POST" action="{{ route('project.update', $projects->id) }}">
+                        @csrf
+                        @method('PUT')
+
+                        <!-- Nama Project -->
+                        <div class="form-group mb-3">
+                            <label class="small font-weight-bold text-secondary mb-1">
+                                Nama Project
+                            </label>
+
+                            <input type="text" name="project_name" class="form-control bg-light border-0 py-2"
+                                style="border-radius: 8px;" placeholder="Masukkan nama project"
+                                value="{{ old('project_name', $projects->project_name) }}" required autocomplete="off">
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label class="small font-weight-bold text-secondary mb-1">
+                                Nama Client
+                            </label>
+
+                            <input type="text" name="nama_client" class="form-control bg-light border-0 py-2"
+                                style="border-radius: 8px;" placeholder="Masukkan nama client"
+                                value="{{ old('nama_client', $projects->nama_client) }}" required autocomplete="off">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="small font-weight-bold text-secondary mb-1">
+                                Alamat Project
+                            </label>
+
+                            <input type="text" name="alamat_project" class="form-control bg-light border-0 py-2"
+                                style="border-radius: 8px;" placeholder="Masukkan alamat project"
+                                value="{{ old('alamat_project', $projects->alamat_project) }}" required
+                                autocomplete="off">
+                        </div>
+                        <!-- Deskripsi Project -->
+                        <div class="form-group mb-3">
+                            <label class="small font-weight-bold text-secondary mb-1">
+                                Deskripsi Project
+                            </label>
+
+                            <textarea name="project_description" class="form-control bg-light border-0" style="border-radius: 8px;"
+                                rows="3" placeholder="Masukkan deskripsi project" required>{{ old('project_description', $projects->project_description) }}</textarea>
+                        </div>
+                        <!-- Status & Nilai Project -->
+                        <div class="row">
+
+                            <!-- Status -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+
+                                    <label class="small font-weight-bold text-secondary mb-1">
+                                        Status Project
+                                    </label>
+
+                                    <select name="project_status" class="form-control bg-light border-0 custom-select"
+                                        style="border-radius: 8px; height: auto; padding-top: 8px; padding-bottom: 8px;"
+                                        required>
+
+                                        <option value="not_started"
+                                            {{ old('project_status', $projects->project_status) == 'not_started' ? 'selected' : '' }}>
+                                            Belum Dimulai
+                                        </option>
+
+                                        <option value="in_progress"
+                                            {{ old('project_status', $projects->project_status) == 'in_progress' ? 'selected' : '' }}>
+                                            Sedang Berjalan
+                                        </option>
+
+                                        <option value="completed"
+                                            {{ old('project_status', $projects->project_status) == 'completed' ? 'selected' : '' }}>
+                                            Selesai
+                                        </option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <!-- Nilai Project -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+
+                                    <label class="small font-weight-bold text-secondary mb-1">
+                                        Nilai Project
+                                    </label>
+
+                                    <input type="number" name="value_project"
+                                        class="form-control bg-light border-0 py-2" style="border-radius: 8px;"
+                                        placeholder="Contoh: 25000000"
+                                        value="{{ old('value_project', $projects->value_project) }}" min="0"
+                                        required>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Keterangan Nilai -->
+                        <small class="form-text text-muted mb-4" style="font-size: 11px;">
+                            Masukkan nilai project dalam Rupiah tanpa titik atau koma.
+                            Contoh: 25000000.
+                        </small>
+
+                        <!-- Modal Footer -->
+                        <div class="d-flex justify-content-end gap-2 border-0 pt-2">
+
+                            <button class="btn btn-light font-weight-bold px-4 py-2 mr-2 text-secondary"
+                                style="border-radius: 8px;" type="button" data-dismiss="modal">
+                                Batal
+                            </button>
+
+                            <button class="btn btn-primary font-weight-bold px-4 py-2 shadow-sm"
+                                style="border-radius: 8px; background-color: #0d6efd;" type="submit">
+                                Simpan Perubahan
+                            </button>
+
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
         </div>
